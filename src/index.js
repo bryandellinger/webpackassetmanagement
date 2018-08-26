@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import './style.css';
 import Icon from './jasmine_favicon.png';
+import Data from './data.xml';
 
 function component() {
     let element = document.createElement('div');
@@ -12,8 +13,12 @@ function component() {
      var myIcon = new Image();
      myIcon.src = Icon;
 
+     console.log(Data);
+
     element.appendChild(myIcon);
     return element;
   }
+
+
   
   document.body.appendChild(component());
