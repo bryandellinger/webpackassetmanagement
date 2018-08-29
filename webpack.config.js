@@ -1,25 +1,31 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-  module.exports = {
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js'
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-       contentBase: './dist'
-       },
+module.exports = {
+  entry: './src/index.js',
   plugins: [
-     new CleanWebpackPlugin(['dist']),
-     new HtmlWebpackPlugin({
-       title: 'Output Management'
-    })
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Caching'
+    }),
+      new webpack.HashedModuleIdsPlugin()
   ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-      publicPath: '/'
+  output: {
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
     }
-  };
+  }
+};

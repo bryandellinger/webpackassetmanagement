@@ -1,14 +1,17 @@
 {
   "name": "webpack1",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "webpack tutorial",
   "private": true,
   "scripts": {
     "dev": "lite-server",
-    "build": "webpack",
+    "builddev": "webpack --config webpack.dev.js",
+    "buildprod": "webpack --config webpack.prod.js",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open",
-    "server": "node server.js"
+    "server": "node server.js",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +27,7 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-middleware": "^3.2.0",
     "webpack-dev-server": "^3.1.6",
+    "webpack-merge": "^4.1.4",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
